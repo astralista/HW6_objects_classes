@@ -86,50 +86,42 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
+student_1 = Student('Gogi', 'Tsaridze', 'male')
+student_1.courses_in_progress += ['Python']
+student_1.courses_in_progress += ['Git']
+student_1.finished_courses += ['English']
 
+student_2 = Student('Sultan', 'Suleiman', 'male')
+student_2.courses_in_progress += ['Python']
+student_2.courses_in_progress += ['Git']
+student_2.finished_courses += ['Statistics']
 
+reviewer_1 = Reviewer('Egor', 'Letov')
+reviewer_1.courses_attached += ['Python']
+reviewer_1.courses_attached += ['Git']
+reviewer_1.rate_hw(student_1, 'Git', 8)
+reviewer_1.rate_hw(student_1, 'Python', 8)
 
-best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
-best_student.courses_in_progress += ['Techno']
-best_student.finished_courses += ['English']
+reviewer_2 = Reviewer('Anton', 'Ishutin')
+reviewer_2.courses_attached += ['Python']
+reviewer_2.courses_attached += ['Git']
+reviewer_2.rate_hw(student_2, 'Git', 6)
+reviewer_2.rate_hw(student_2, 'Python', 6)
 
-eric_clapton = Student('Eric', 'Clapton', 'man')
-eric_clapton.courses_in_progress += ['Python']
-eric_clapton.courses_in_progress += ['Techno']
+lecturer_1 = Lecturer('Eric', 'Prydz')
+lecturer_1.courses_attached += ['Python']
+lecturer_1.courses_attached += ['Git']
+student_1.rate_lecture(lecturer_1, 'Python', 9)
+student_2.rate_lecture(lecturer_1, 'Python', 7)
 
-john_dow = Lecturer('John', 'Dow')
-john_dow.courses_attached += ['Python']
-best_student.rate_lecture(john_dow, 'Python', 8)
+lecturer_2 = Lecturer('Calvin', 'Harris')
+lecturer_2.courses_attached += ['Python']
+lecturer_2.courses_attached += ['Git']
+student_1.rate_lecture(lecturer_2, 'Python', 7)
+student_2.rate_lecture(lecturer_2, 'Python', 5)
 
-eric_prydz = Lecturer('Eric', 'Prydz')
-eric_prydz.courses_attached += ['Techno']
-best_student.rate_lecture(eric_prydz, 'Techno', 6)
-best_student.rate_lecture(eric_prydz, 'Techno', 10)
-best_student.rate_lecture(eric_prydz, 'Techno', 10)
-best_student.rate_lecture(eric_prydz, 'Techno', 10)
-
-some_buddy = Reviewer('Some', 'Buddy')
-some_buddy.courses_attached += ['Python']
-some_buddy.courses_attached += ['Techno']
-
-some_buddy.rate_hw(best_student, 'Python', 10)
-some_buddy.rate_hw(best_student, 'Python', 10)
-some_buddy.rate_hw(best_student, 'Python', 10)
-some_buddy.rate_hw(best_student, 'Techno', 2)
-some_buddy.rate_hw(best_student, 'Techno', 8)
-some_buddy.rate_hw(eric_clapton, 'Techno', 8)
-some_buddy.rate_hw(eric_clapton, 'Techno', 5)
-some_buddy.rate_hw(eric_clapton, 'Techno', 5)
-some_buddy.rate_hw(eric_clapton, 'Python', 4)
-some_buddy.rate_hw(eric_clapton, 'Python', 10)
-
-best_student.courses_in_progress += ['Techno']
-best_student.rate_lecture(eric_prydz, 'Techno', 10)
-
-# print(best_student)
-# print(eric_clapton)
-print(eric_clapton < best_student)
-
+print(f'лектор Кальвин Харрис круче чем лектор Ерик Придз: {lecturer_1 > lecturer_2}')
+print(student_1)
+print(lecturer_1)
 
 
