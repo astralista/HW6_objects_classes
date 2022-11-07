@@ -26,6 +26,11 @@ class Student:
             a += sum(grades[j])
             b += len(grades[j])
         return round(a / b, 1)
+    def __lt__(self, other):
+        if not isinstance(other, Student):
+            print('Это не студент')
+            return
+        return self.avrg_mark(self.grades) < other.avrg_mark(other.grades)
 
     def __str__(self):
         return f"Имя: {self.name}" \
@@ -45,22 +50,30 @@ class Mentor:
         return f"Имя: {self.name}\nФамилия: {self.surname}"
 
 class Lecturer(Mentor):
+
     def __init__(self, name, surname):
         super(Lecturer, self).__init__(name, surname)
         self.grades = {}
 
-    def avrg_mark(self, grades):
+
+    def av_mark(self, grades):
         a = 0
         b = 0
-        for j in grades:
-            a += sum(grades[j])
-            b += len(grades[j])
+        for value in grades:
+            a += sum(grades[value])
+            b += len(grades[value])
         return round(a / b, 1)
+
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer):
+            print('Это не лектор')
+            return
+        return self.av_mark(self.grades) < other.av_mark(other.grades)
 
     def __str__(self):
         return f"Имя: {self.name}" \
                f"\nФамилия: {self.surname}" \
-               f"\nСредняя оценка за лекции: {self.avrg_mark(self.grades)}"
+               f"\nСредняя оценка за лекции: {self.av_mark(self.grades)}"
 
 
 class Reviewer(Mentor):
@@ -81,31 +94,42 @@ best_student.courses_in_progress += ['Python']
 best_student.courses_in_progress += ['Techno']
 best_student.finished_courses += ['English']
 
-fine_lecturer = Lecturer('John', 'Dow')
-fine_lecturer.courses_attached += ['Python']
-best_student.rate_lecture(fine_lecturer, 'Python', 8)
+eric_clapton = Student('Eric', 'Clapton', 'man')
+eric_clapton.courses_in_progress += ['Python']
+eric_clapton.courses_in_progress += ['Techno']
 
-some_lecturer = Lecturer('Eric', 'Prydz')
-some_lecturer.courses_attached += ['Techno']
-best_student.rate_lecture(some_lecturer, 'Techno', 6)
+john_dow = Lecturer('John', 'Dow')
+john_dow.courses_attached += ['Python']
+best_student.rate_lecture(john_dow, 'Python', 8)
 
-cool_mentor = Reviewer('Some', 'Buddy')
-cool_mentor.courses_attached += ['Python']
-cool_mentor.courses_attached += ['Techno']
+eric_prydz = Lecturer('Eric', 'Prydz')
+eric_prydz.courses_attached += ['Techno']
+best_student.rate_lecture(eric_prydz, 'Techno', 6)
+best_student.rate_lecture(eric_prydz, 'Techno', 10)
+best_student.rate_lecture(eric_prydz, 'Techno', 10)
+best_student.rate_lecture(eric_prydz, 'Techno', 10)
 
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Techno', 2)
-cool_mentor.rate_hw(best_student, 'Techno', 8)
+some_buddy = Reviewer('Some', 'Buddy')
+some_buddy.courses_attached += ['Python']
+some_buddy.courses_attached += ['Techno']
 
-# print(best_student.grades)
-# print(best_student.finished_courses)
-# print(f"student {best_student.name} gave the teacher {fine_lecturer.name} {fine_lecturer.surname} {fine_lecturer.grades}")
-# print(some_lecturer.grades)
-#
-# best_student.courses_in_progress += ['Techno']
-# best_student.rate_lecture(some_lecturer, 'Techno', 10)
-print(some_lecturer)
+some_buddy.rate_hw(best_student, 'Python', 10)
+some_buddy.rate_hw(best_student, 'Python', 10)
+some_buddy.rate_hw(best_student, 'Python', 10)
+some_buddy.rate_hw(best_student, 'Techno', 2)
+some_buddy.rate_hw(best_student, 'Techno', 8)
+some_buddy.rate_hw(eric_clapton, 'Techno', 8)
+some_buddy.rate_hw(eric_clapton, 'Techno', 5)
+some_buddy.rate_hw(eric_clapton, 'Techno', 5)
+some_buddy.rate_hw(eric_clapton, 'Python', 4)
+some_buddy.rate_hw(eric_clapton, 'Python', 10)
+
+best_student.courses_in_progress += ['Techno']
+best_student.rate_lecture(eric_prydz, 'Techno', 10)
+
 # print(best_student)
+# print(eric_clapton)
+print(eric_clapton < best_student)
+
+
 
